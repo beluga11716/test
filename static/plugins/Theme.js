@@ -15,16 +15,14 @@ const Theme = {
                 background-size: cover !important;
                 min-height: 100vh;
                 margin: 0;
-                display: flex;
-                justify-content: center;
-                align-items: flex-start;
                 padding-top: 2rem;
             }
 
-            /* 毛玻璃主容器 */
+            /* 毛玻璃主容器（居中） */
             #glassShell {
                 width: 100%;
                 max-width: 600px;
+                margin: 0 auto !important; /* 核心：居中 */
                 padding: 2rem;
                 background: rgba(255, 255, 255, 0.2) !important;
                 backdrop-filter: blur(30px) !important;
@@ -45,7 +43,7 @@ const Theme = {
                 padding-bottom: 1rem !important;
                 border-bottom: 1px solid rgba(255,255,255,0.3) !important;
             }
-            #header .avatar {
+            #header img {
                 width: 60px !important;
                 height: 60px !important;
                 border-radius: 50% !important;
@@ -54,47 +52,40 @@ const Theme = {
             #header .title-group {
                 flex: 1 !important;
             }
-            #header .title {
+            #header h1 {
                 font-size: 24px !important;
                 font-weight: bold !important;
                 margin: 0 !important;
                 color: #222 !important;
             }
-            #header .subtitle {
+            #header p {
                 font-size: 14px !important;
                 opacity: 0.8 !important;
                 margin: 4px 0 0 !important;
             }
 
-            /* ====================================== */
-            /* 🔥 文章表格 超强毛玻璃（肉眼可见版） */
-            /* ====================================== */
-            #glassShell *[class*="table"],
+            /* 🔥 文章表格 可见毛玻璃 */
             #glassShell table,
-            #glassShell tr,
-            #glassShell td {
+            #glassShell table tr,
+            #glassShell table td {
                 background: rgba(255, 255, 255, 0.1) !important;
                 backdrop-filter: blur(20px) !important;
                 -webkit-backdrop-filter: blur(20px) !important;
                 border: 1px solid rgba(255,255,255,0.35) !important;
                 border-radius: 12px !important;
-                margin-bottom: 8px !important;
                 transition: all 0.3s ease !important;
             }
-
-            #glassShell tr:hover {
+            #glassShell table tr:hover {
                 background: rgba(255, 255, 255, 0.25) !important;
                 transform: translateY(-2px) !important;
             }
-
             #glassShell table {
                 width: 100% !important;
                 border-collapse: separate !important;
                 border-spacing: 0 6px !important;
-                overflow: visible !important;
+                margin: 1rem 0 !important;
             }
-
-            #glassShell td {
+            #glassShell table td {
                 padding: 12px 14px !important;
             }
 
@@ -107,29 +98,42 @@ const Theme = {
         document.head.appendChild(style);
     },
 
+    // 修复：正确包裹内容，不丢失元素
     wrapAppInGlass() {
         const app = document.body;
         if (!app) return;
+        
+        // 先检查是否已有玻璃容器，避免重复
+        if (document.getElementById('glassShell')) return;
+        
         const glass = document.createElement('div');
         glass.id = 'glassShell';
-        while (app.firstChild) {
-            glass.appendChild(app.firstChild);
-        }
+        
+        // 把 body 里的内容逐个移动（修复丢失问题）
+        const children = Array.from(app.children);
+        children.forEach(child => {
+            glass.appendChild(child);
+        });
         app.appendChild(glass);
     },
 
     adjustHeaderLayout() {
         const header = document.querySelector('header') || document.getElementById('header');
         if (!header) return;
+        
+        // 保留原有标题/头像，不覆盖
         const avatar = header.querySelector('img');
+        const title = header.querySelector('h1');
+        if (!title) return;
+        
         const titleGroup = document.createElement('div');
         titleGroup.className = 'title-group';
-        const title = header.querySelector('h1') || document.createElement('h1');
-        title.className = 'title';
-        const subtitle = document.createElement('p');
-        subtitle.className = 'subtitle';
         titleGroup.appendChild(title);
+        
+        // 保留原有副标题（如果有）
+        const subtitle = header.querySelector('p') || document.createElement('p');
         titleGroup.appendChild(subtitle);
+        
         header.innerHTML = '';
         if (avatar) header.appendChild(avatar);
         header.appendChild(titleGroup);
@@ -142,6 +146,9 @@ const Theme = {
     }
 };
 
-window.addEventListener('DOMContentLoaded', () => {
+// 页面加载完成后执行（兼容所有情况）
+if (document.readyState === 'complete') {
     Theme.init();
-});
+} else {
+    window.addEventListener('DOMContentLoaded', () => Theme.init());
+}
