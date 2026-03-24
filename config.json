@@ -3,6 +3,6 @@
     "subTitle":"Blog description",
     "avatarUrl":"https://github.githubassets.com/favicons/favicon.svg",
     "primerCSS": "<link href='/plugins/primer.css' rel='stylesheet' />",
-    "allHead": "<script src='/plugins/Theme.js'></script>"
+    "allHead": "<script src='/plugins/Theme.js'></script>",
     "GMEEK_VERSION":"last"
 }
