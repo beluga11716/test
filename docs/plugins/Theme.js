@@ -66,29 +66,28 @@ const Theme = {
                 margin: 4px 0 0;
             }
 
-            /* 文章列表毛玻璃（核心修复） */
-            .article-item, table {
+            /* 🔥 强制给文章表格加毛玻璃（核心修复） */
+            #glassShell table,
+            #glassShell table tr,
+            #glassShell table td {
                 background: rgba(255, 255, 255, 0.15) !important;
-                backdrop-filter: blur(10px) !important;
-                -webkit-backdrop-filter: blur(10px) !important;
-                border-radius: 10px !important;
+                backdrop-filter: blur(12px) !important;
+                -webkit-backdrop-filter: blur(12px) !important;
                 border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                border-radius: 8px !important;
                 transition: all 0.3s ease;
             }
-            .article-item:hover, table tr:hover {
+            #glassShell table tr:hover {
                 background: rgba(255, 255, 255, 0.25) !important;
-                transform: translateY(-2px);
+                transform: translateY(-1px);
             }
-
-            /* 表格样式适配 */
-            table {
+            #glassShell table {
                 width: 100%;
                 border-collapse: separate;
-                border-spacing: 0;
+                border-spacing: 0 8px;
                 overflow: hidden;
             }
-            table td, table th {
-                border: none !important;
+            #glassShell table td {
                 padding: 0.8rem 1rem;
             }
 
