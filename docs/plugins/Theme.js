@@ -1,6 +1,18 @@
 const Theme = {
     init() {
+        this.wrapContent();
         this.createGlassStyle();
+    },
+
+    // 把所有内容包进一个容器
+    wrapContent() {
+        const container = document.createElement('div');
+        container.id = 'glassContainer';
+        // 把 body 里所有内容移进去
+        while (document.body.firstChild) {
+            container.appendChild(document.body.firstChild);
+        }
+        document.body.appendChild(container);
     },
 
     createGlassStyle() {
@@ -14,10 +26,8 @@ html, body {
     padding: 30px;
 }
 
-/* 🔥 给所有页面内容加毛玻璃（适配 Gmeek 结构） */
-body > div,
-body > main,
-body > section {
+/* 🔥 唯一的毛玻璃容器，整体居中 */
+#glassContainer {
     max-width: 600px !important;
     margin: 0 auto !important;
     padding: 30px !important;
@@ -35,6 +45,8 @@ body > section {
     align-items: center !important;
     gap: 16px !important;
     margin-bottom: 20px !important;
+    padding-bottom: 15px !important;
+    border-bottom: 1px solid rgba(255,255,255,0.3) !important;
 }
 #header img, header img {
     width: 60px !important;
@@ -65,6 +77,8 @@ table td:hover {
 footer {
     text-align: center;
     margin-top: 20px;
+    padding-top: 15px !important;
+    border-top: 1px solid rgba(255,255,255,0.3) !important;
     color: #333;
 }
 `;
