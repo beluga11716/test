@@ -66,29 +66,35 @@ const Theme = {
                 margin: 4px 0 0;
             }
 
-            /* 🔥 强制给文章表格加毛玻璃（核心修复） */
+            /* 🔥 终极强制毛玻璃：覆盖所有表格层级 */
             #glassShell table,
             #glassShell table tr,
-            #glassShell table td {
-                background: rgba(255, 255, 255, 0.15) !important;
-                backdrop-filter: blur(12px) !important;
-                -webkit-backdrop-filter: blur(12px) !important;
-                border: 1px solid rgba(255, 255, 255, 0.2) !important;
-                border-radius: 8px !important;
-                transition: all 0.3s ease;
+            #glassShell table td,
+            #glassShell .table,
+            #glassShell .table tr,
+            #glassShell .table td {
+                background: rgba(255, 255, 255, 0.18) !important;
+                backdrop-filter: blur(15px) !important;
+                -webkit-backdrop-filter: blur(15px) !important;
+                border: 1px solid rgba(255, 255, 255, 0.25) !important;
+                border-radius: 10px !important;
+                transition: all 0.3s ease !important;
             }
-            #glassShell table tr:hover {
-                background: rgba(255, 255, 255, 0.25) !important;
-                transform: translateY(-1px);
+            #glassShell table tr:hover,
+            #glassShell .table tr:hover {
+                background: rgba(255, 255, 255, 0.28) !important;
+                transform: translateY(-2px) !important;
             }
-            #glassShell table {
+            #glassShell table,
+            #glassShell .table {
                 width: 100%;
-                border-collapse: separate;
-                border-spacing: 0 8px;
-                overflow: hidden;
+                border-collapse: separate !important;
+                border-spacing: 0 8px !important;
+                overflow: hidden !important;
             }
-            #glassShell table td {
-                padding: 0.8rem 1rem;
+            #glassShell table td,
+            #glassShell .table td {
+                padding: 0.8rem 1rem !important;
             }
 
             /* 淡入动画 */
