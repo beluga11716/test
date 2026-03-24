@@ -6,7 +6,7 @@ const Theme = {
     createGlassStyle() {
         const style = document.createElement('style');
         style.textContent = `
-/* 全局背景 */
+/* 全局背景（雪山图） */
 html, body {
     background: url('https://picsum.photos/id/1036/1920/1080') center/cover fixed no-repeat !important;
     min-height: 100vh;
@@ -14,8 +14,10 @@ html, body {
     padding: 30px;
 }
 
-/* 主容器居中 + 毛玻璃 */
-#app {
+/* 🔥 给所有页面内容加毛玻璃（适配 Gmeek 结构） */
+body > div,
+body > main,
+body > section {
     max-width: 600px !important;
     margin: 0 auto !important;
     padding: 30px !important;
@@ -28,13 +30,13 @@ html, body {
 }
 
 /* 头部横排布局 */
-#header {
+#header, header {
     display: flex !important;
     align-items: center !important;
     gap: 16px !important;
     margin-bottom: 20px !important;
 }
-#header img {
+#header img, header img {
     width: 60px !important;
     height: 60px !important;
     border-radius: 50% !important;
@@ -57,6 +59,13 @@ table td {
 table td:hover {
     background: rgba(255,255,255,0.25) !important;
     transform: translateY(-2px) !important;
+}
+
+/* 页脚样式 */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
 }
 `;
 document.head.appendChild(style);
