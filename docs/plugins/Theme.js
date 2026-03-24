@@ -157,15 +157,15 @@ const Theme = {
         setTimeout(() => {
             document.body.style.opacity = '1';
 
-            // ✅ 延迟执行文章包裹逻辑，确保 ul 已经渲染出来
-            const posts = document.querySelector('#glassShell ul');
+            // ✅ 延迟执行文章包裹逻辑，确保文章区块已渲染
+            const posts = document.querySelector('#glassShell .post-list, #glassShell .markdown-body, #glassShell ul');
             if (posts && !posts.parentElement.classList.contains('post-content')) {
                 const wrapper = document.createElement('div');
                 wrapper.className = 'post-content';
                 posts.parentNode.insertBefore(wrapper, posts);
                 wrapper.appendChild(posts);
             }
-        }, 200);
+        }, 300);
     }
 };
 
