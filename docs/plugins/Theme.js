@@ -9,7 +9,7 @@ const Theme = {
     createGlassStyle() {
         const style = document.createElement('style');
         style.textContent = `
-            /* 全局背景（雪山图） */
+            /* 全局背景 */
             html, body {
                 background: url('https://picsum.photos/id/1036/1920/1080') no-repeat center center fixed !important;
                 background-size: cover !important;
@@ -132,15 +132,6 @@ const Theme = {
             glass.appendChild(app.firstChild);
         }
         app.appendChild(glass);
-
-        // ✅ 包裹文章主体（假设文章列表是 ul）
-        const posts = glass.querySelector('ul');
-        if (posts) {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'post-content';
-            posts.parentNode.insertBefore(wrapper, posts);
-            wrapper.appendChild(posts);
-        }
     },
 
     adjustHeaderLayout() {
@@ -165,7 +156,16 @@ const Theme = {
     addAnimations() {
         setTimeout(() => {
             document.body.style.opacity = '1';
-        }, 100);
+
+            // ✅ 延迟执行文章包裹逻辑，确保 ul 已经渲染出来
+            const posts = document.querySelector('#glassShell ul');
+            if (posts && !posts.parentElement.classList.contains('post-content')) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'post-content';
+                posts.parentNode.insertBefore(wrapper, posts);
+                wrapper.appendChild(posts);
+            }
+        }, 200);
     }
 };
 
