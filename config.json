@@ -2,10 +2,10 @@
     "title":"Blog Title",
     "subTitle":"Blog description",
     "avatarUrl":"https://github.githubassets.com/favicons/favicon.svg",
-    "primerCSS": "<link href='/plugins/primer.css' rel='stylesheet' />",
     "themeMode": "fix",
     "dayTheme": "light",
     "nightTheme": "dark",
-    "allHead": "<script src='/plugins/Theme.js'></script>",
+    "primerCSS": "<link href='/test/plugins/primer.css' rel='stylesheet' />",
+    "allHead": "<script src='/test/plugins/Theme.js'></script>",
     "GMEEK_VERSION":"last"
 }
