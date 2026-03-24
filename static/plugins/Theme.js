@@ -1,60 +1,53 @@
 const Theme = {
     init() {
-        this.wrapContent();
         this.createGlassStyle();
-    },
-
-    // 把所有内容包进一个容器
-    wrapContent() {
-        const container = document.createElement('div');
-        container.id = 'glassContainer';
-        // 把 body 里所有内容移进去
-        while (document.body.firstChild) {
-            container.appendChild(document.body.firstChild);
-        }
-        document.body.appendChild(container);
     },
 
     createGlassStyle() {
         const style = document.createElement('style');
         style.textContent = `
-/* 全局背景（雪山图） */
+
+/* 全局背景 + 让内容强制居中 */
 html, body {
-    background: url('https://picsum.photos/id/1036/1920/1080') center/cover fixed no-repeat !important;
-    min-height: 100vh;
-    margin: 0;
-    padding: 30px;
+    background: url('https://picsum.photos/id/1036/1920/1080') center/cover fixed !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+    padding: 40px 20px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
 }
 
-/* 🔥 唯一的毛玻璃容器，整体居中 */
-#glassContainer {
-    max-width: 600px !important;
-    margin: 0 auto !important;
-    padding: 30px !important;
-    background: rgba(255,255,255,0.25) !important;
-    backdrop-filter: blur(25px) !important;
-    -webkit-backdrop-filter: blur(25px) !important;
+/* 整体毛玻璃外壳 + 居中 */
+body > * {
+    max-width: 620px !important;
+    width: 100% !important;
+    padding: 35px !important;
+    background: rgba(255,255,255,0.22) !important;
+    backdrop-filter: blur(22px) !important;
+    -webkit-backdrop-filter: blur(22px) !important;
     border-radius: 24px !important;
     border: 1px solid rgba(255,255,255,0.3) !important;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.1) !important;
+    margin: 0 auto !important;
 }
 
-/* 头部横排布局 */
-#header, header {
+/* 头部横排 */
+#header {
     display: flex !important;
     align-items: center !important;
     gap: 16px !important;
-    margin-bottom: 20px !important;
-    padding-bottom: 15px !important;
-    border-bottom: 1px solid rgba(255,255,255,0.3) !important;
+    margin-bottom: 25px !important;
 }
-#header img, header img {
+#header img {
     width: 60px !important;
     height: 60px !important;
     border-radius: 50% !important;
 }
 
-/* 文章表格毛玻璃 */
+/* ====================== */
+/* 文章表格 毛玻璃效果 */
+/* ====================== */
 table {
     width: 100% !important;
     border-collapse: separate !important;
@@ -62,27 +55,19 @@ table {
 }
 table td {
     background: rgba(255,255,255,0.15) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
     border-radius: 10px !important;
-    padding: 12px 14px !important;
-    transition: 0.3s !important;
+    padding: 13px 16px !important;
+    transition: 0.25s ease !important;
 }
 table td:hover {
     background: rgba(255,255,255,0.25) !important;
-    transform: translateY(-2px) !important;
+    transform: translateY(-1.5px) !important;
 }
 
-/* 页脚样式 */
-footer {
-    text-align: center;
-    margin-top: 20px;
-    padding-top: 15px !important;
-    border-top: 1px solid rgba(255,255,255,0.3) !important;
-    color: #333;
-}
 `;
-document.head.appendChild(style);
+        document.head.appendChild(style);
     }
 };
 
