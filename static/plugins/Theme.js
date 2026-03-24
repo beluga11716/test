@@ -9,18 +9,22 @@ const Theme = {
     createGlassStyle() {
         const style = document.createElement('style');
         style.textContent = `
-            /* 全局背景（让毛玻璃能看出模糊） */
+            /* 全局背景（雪山图） */
             html, body {
                 background: url('https://picsum.photos/id/1036/1920/1080') no-repeat center center fixed !important;
                 background-size: cover !important;
                 min-height: 100vh;
                 margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                padding-top: 2rem;
             }
 
-            /* 毛玻璃主容器（强化模糊） */
+            /* 毛玻璃主容器（居中+毛玻璃） */
             #glassShell {
+                width: 100%;
                 max-width: 600px;
-                margin: 2rem auto;
                 padding: 2rem;
                 background: rgba(255, 255, 255, 0.2) !important;
                 backdrop-filter: blur(30px) !important;
@@ -62,17 +66,30 @@ const Theme = {
                 margin: 4px 0 0;
             }
 
-            /* 文章列表 */
-            .article-item {
-                background: rgba(255, 255, 255, 0.1) !important;
-                border-radius: 10px;
-                margin: 0.5rem 0;
-                padding: 0.8rem 1rem;
+            /* 文章列表毛玻璃（核心修复） */
+            .article-item, table {
+                background: rgba(255, 255, 255, 0.15) !important;
+                backdrop-filter: blur(10px) !important;
+                -webkit-backdrop-filter: blur(10px) !important;
+                border-radius: 10px !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
                 transition: all 0.3s ease;
             }
-            .article-item:hover {
-                background: rgba(255, 255, 255, 0.2) !important;
+            .article-item:hover, table tr:hover {
+                background: rgba(255, 255, 255, 0.25) !important;
                 transform: translateY(-2px);
+            }
+
+            /* 表格样式适配 */
+            table {
+                width: 100%;
+                border-collapse: separate;
+                border-spacing: 0;
+                overflow: hidden;
+            }
+            table td, table th {
+                border: none !important;
+                padding: 0.8rem 1rem;
             }
 
             /* 淡入动画 */
