@@ -5,7 +5,7 @@
     "themeMode": "fix",
     "dayTheme": "light",
     "nightTheme": "dark",
-    "primerCSS": "<link href='/test/plugins/primer.css' rel='stylesheet' />",
-    "allHead": "<script src='/test/plugins/Theme.js'></script>",
+    "primerCSS": "<link href='/raynard/plugins/primer.css' rel='stylesheet' />",
+    "allHead": "<script src='/raynard/plugins/Theme.js'></script>",
     "GMEEK_VERSION":"last"
 }
