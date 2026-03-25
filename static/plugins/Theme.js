@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {    
     let currentUrl = window.location.pathname;
 
+    // 背景遮罩
     function ensureBackgroundOverlay() {
         if (document.getElementById('bgOverlay')) return;
         const overlay = document.createElement('div');
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.insertBefore(overlay, document.body.firstChild);
     }
 
+    // GlassShell 容器
     function ensureGlassShell() {
         if (document.getElementById('glassShell')) return;
         const shell = document.createElement('div');
@@ -30,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(shell);
     }
 
+    // 通用样式：居中 + 毛玻璃
     function baseStyle() {
         return `
         body {
@@ -49,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
             max-width: 900px !important;
             margin: 0 auto !important;
             padding: 44px !important;
-            background: rgba(255, 255, 255, 0.18) !important;
+            background: rgba(255, 255, 255, 0.25) !important; /* 半透明背景保证毛玻璃 */
             border-radius: 18px !important;
             box-shadow: 0 28px 90px rgba(0,0,0,0.36) !important;
             backdrop-filter: blur(20px) saturate(1.35) !important;
@@ -58,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     }
 
+    // 主页主题------------------------------------------------------------------------------
     if (currentUrl == '/test/' || currentUrl.includes('/index.html') || currentUrl.includes('/page')) {
         let style = document.createElement("style");
         style.innerHTML = baseStyle();
@@ -65,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ensureBackgroundOverlay();
         ensureGlassShell();
     }
+    // 文章页主题------------------------------------------------------------------------------
     else if (currentUrl.includes('/post/') || currentUrl.includes('/link.html') || currentUrl.includes('/about.html')) {
         let style = document.createElement("style");
         style.innerHTML = baseStyle();
@@ -72,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ensureBackgroundOverlay();
         ensureGlassShell();
     }
+    // 搜索页主题------------------------------------------------------------------------------
     else if (currentUrl.includes('/tag')) {
         let style = document.createElement("style");
         style.innerHTML = baseStyle();
