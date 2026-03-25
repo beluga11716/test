@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {    
-    let currentUrl = window.location.pathname;
-
+    // 背景遮罩
     function ensureBackgroundOverlay() {
         if (document.getElementById('bgOverlay')) return;
         const overlay = document.createElement('div');
@@ -15,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.insertBefore(overlay, document.body.firstChild);
     }
 
+    // GlassShell 容器
     function ensureGlassShell() {
         if (document.getElementById('glassShell')) return;
         const shell = document.createElement('div');
@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(shell);
     }
 
+    // 样式：毛玻璃 + 动画阴影
     function baseStyle() {
         return `
         body {
@@ -51,42 +52,28 @@ document.addEventListener('DOMContentLoaded', function() {
             padding: 44px !important;
             background: rgba(255, 255, 255, 0.25) !important;
             border-radius: 18px !important;
-            box-shadow: 0 28px 90px rgba(0,0,0,0.36) !important;
             backdrop-filter: blur(20px) saturate(1.35) !important;
             -webkit-backdrop-filter: blur(20px) saturate(1.35) !important;
+            animation: floatShadow 1.2s ease-in-out infinite alternate !important;
         }
 
-        /* 覆盖 primer.css 的容器布局 */
-        .container-lg, .Layout, .markdown-body {
-            margin: 0 auto !important;
-            max-width: 900px !important;
-            background: rgba(255,255,255,0.25) !important;
-            backdrop-filter: blur(20px) saturate(1.35) !important;
-            -webkit-backdrop-filter: blur(20px) saturate(1.35) !important;
-            border-radius: 12px !important;
+        @keyframes floatShadow {
+            from {
+                box-shadow: 0 18px 45px rgba(0,0,0,0.22);
+                transform: translateY(0);
+            }
+            to {
+                box-shadow: 0 28px 90px rgba(0,0,0,0.36);
+                transform: translateY(-6px);
+            }
         }
         `;
     }
 
-    if (currentUrl == '/test/' || currentUrl.includes('/index.html') || currentUrl.includes('/page')) {
-        let style = document.createElement("style");
-        style.innerHTML = baseStyle();
-        document.head.appendChild(style);
-        ensureBackgroundOverlay();
-        ensureGlassShell();
-    }
-    else if (currentUrl.includes('/post/') || currentUrl.includes('/link.html') || currentUrl.includes('/about.html')) {
-        let style = document.createElement("style");
-        style.innerHTML = baseStyle();
-        document.head.appendChild(style);
-        ensureBackgroundOverlay();
-        ensureGlassShell();
-    }
-    else if (currentUrl.includes('/tag')) {
-        let style = document.createElement("style");
-        style.innerHTML = baseStyle();
-        document.head.appendChild(style);
-        ensureBackgroundOverlay();
-        ensureGlassShell();
-    }
+    // 注入样式并启用容器
+    let style = document.createElement("style");
+    style.innerHTML = baseStyle();
+    document.head.appendChild(style);
+    ensureBackgroundOverlay();
+    ensureGlassShell();
 });
