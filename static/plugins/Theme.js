@@ -32,11 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(shell);
     }
 
-    // 主页主题------------------------------------------------------------------------------
-    if (currentUrl == '/test/' || currentUrl.includes('/index.html') || currentUrl.includes('/page')) {
-        console.log('应用主页主题');
-        let style = document.createElement("style");
-        style.innerHTML = `
+    // 通用样式：居中 + 毛玻璃
+    function baseStyle() {
+        return `
         body {
             margin: 0 !important;
             padding: 40px 20px !important;
@@ -61,7 +59,14 @@ document.addEventListener('DOMContentLoaded', function() {
             backdrop-filter: blur(20px) saturate(1.35) !important;
             -webkit-backdrop-filter: blur(20px) saturate(1.35) !important;
         }
+        `;
+    }
 
+    // 主页主题------------------------------------------------------------------------------
+    if (currentUrl == '/test/' || currentUrl.includes('/index.html') || currentUrl.includes('/page')) {
+        console.log('应用主页主题');
+        let style = document.createElement("style");
+        style.innerHTML = baseStyle() + `
         #header {
             height: 300px !important;
             display: grid !important;
@@ -117,31 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
     else if (currentUrl.includes('/post/') || currentUrl.includes('/link.html') || currentUrl.includes('/about.html')) {
         console.log('文章页主题');
         let style = document.createElement("style");
-        style.innerHTML = `
-        body {
-            margin: 0 !important;
-            padding: 40px 20px !important;
-            display: flex !important;
-            justify-content: center !important;
-            min-height: 100vh !important;
-            background: url('/test/img/bg.jpg') no-repeat center center fixed !important;
-            background-size: cover !important;
-        }
-
-        #glassShell {
-            position: relative !important;
-            z-index: 2 !important;
-            width: 100% !important;
-            max-width: 900px !important;
-            margin: 0 auto !important;
-            padding: 44px !important;
-            background: rgba(255, 255, 255, 0.18) !important;
-            border-radius: 18px !important;
-            box-shadow: 0 28px 90px rgba(0,0,0,0.36) !important;
-            backdrop-filter: blur(20px) saturate(1.35) !important;
-            -webkit-backdrop-filter: blur(20px) saturate(1.35) !important;
-        }
-
+        style.innerHTML = baseStyle() + `
         .markdown-body img { border-radius: 8px !important; }
         .markdown-alert { border-radius: 8px !important; }
         .markdown-body .highlight pre { background-color: rgba(245,246,248,0.92) !important; border-radius: 8px !important; }
@@ -157,31 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
     else if (currentUrl.includes('/tag')) {
         console.log('应用搜索页主题');
         let style = document.createElement("style");
-        style.innerHTML = `
-        body {
-            margin: 0 !important;
-            padding: 40px 20px !important;
-            display: flex !important;
-            justify-content: center !important;
-            min-height: 100vh !important;
-            background: url('/test/img/bg.jpg') no-repeat center center fixed !important;
-            background-size: cover !important;
-        }
-
-        #glassShell {
-            position: relative !important;
-            z-index: 2 !important;
-            width: 100% !important;
-            max-width: 900px !important;
-            margin: 0 auto !important;
-            padding: 44px !important;
-            background: rgba(255, 255, 255, 0.18) !important;
-            border-radius: 18px !important;
-            box-shadow: 0 28px 90px rgba(0,0,0,0.36) !important;
-            backdrop-filter: blur(20px) saturate(1.35) !important;
-            -webkit-backdrop-filter: blur(20px) saturate(1.35) !important;
-        }
-
+        style.innerHTML = baseStyle() + `
         .SideNav { background: rgba(255,255,255,0.12) !important; border-radius: 16px !important; backdrop-filter: blur(10px) saturate(1.15) !important; }
         .SideNav-item:hover { background: linear-gradient(135deg, rgba(195,228,227,0.72), rgba(255,255,255,0.55)) !important; border-radius: 12px !important; }
         .subnav-search-input { border-radius: 2em !important; }
@@ -194,4 +151,15 @@ document.addEventListener('DOMContentLoaded', function() {
         ensureGlassShell();
 
         // 搜索框回车触发
-        let input = document.getElementsByClassName("form-control subnav-search-input float-left
+        let input = document.getElementsByClassName("form-control subnav-search-input float-left")[0];
+        let button = document.getElementsByClassName("btn float-left")[0];
+        if (input && button) {
+            input.addEventListener("keyup", function(event) {
+                event.preventDefault();
+                if (event.keyCode === 13) {
+                    button.click();
+                }
+            });
+        }
+    }
+});
