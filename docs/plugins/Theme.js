@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(shell);
     }
 
-    // 通用样式：居中 + 毛玻璃
+    // 通用样式：居中 + 毛玻璃 + 覆盖 primer.css
     function baseStyle() {
         return `
         body {
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
             justify-content: center !important;
             align-items: flex-start !important;
             min-height: 100vh !important;
-            background: #f0f0f0 !important; /* 简单背景，避免404 */
+            background: #f0f0f0 !important;
         }
 
         #glassShell {
@@ -52,11 +52,21 @@ document.addEventListener('DOMContentLoaded', function() {
             max-width: 900px !important;
             margin: 0 auto !important;
             padding: 44px !important;
-            background: rgba(255, 255, 255, 0.25) !important; /* 半透明背景保证毛玻璃 */
+            background: rgba(255, 255, 255, 0.25) !important;
             border-radius: 18px !important;
             box-shadow: 0 28px 90px rgba(0,0,0,0.36) !important;
             backdrop-filter: blur(20px) saturate(1.35) !important;
             -webkit-backdrop-filter: blur(20px) saturate(1.35) !important;
+        }
+
+        /* 覆盖 primer.css 的容器布局 */
+        .container-lg, .Layout, .markdown-body {
+            margin: 0 auto !important;
+            max-width: 900px !important;
+            background: rgba(255,255,255,0.25) !important;
+            backdrop-filter: blur(20px) saturate(1.35) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(1.35) !important;
+            border-radius: 12px !important;
         }
         `;
     }
