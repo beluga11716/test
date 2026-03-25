@@ -39,8 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
             justify-content: center !important;
             align-items: flex-start !important;
             min-height: 100vh !important;
-            background: url('/test/img/bg.jpg') no-repeat center center fixed !important;
-            background-size: cover !important;
+            background: #f0f0f0 !important; /* 简单背景，避免404 */
         }
 
         #glassShell {
