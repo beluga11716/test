@@ -77,3 +77,13 @@ pre {
   padding: 16px;
   overflow-x: auto;
 }
+/* 居中和毛玻璃覆盖 */
+.container-lg, .Layout, .markdown-body {
+  margin: 0 auto !important;
+  max-width: 900px !important;
+  background: rgba(255,255,255,0.25) !important;
+  backdrop-filter: blur(20px) saturate(1.35) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.35) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 28px 90px rgba(0,0,0,0.36) !important;
+}
