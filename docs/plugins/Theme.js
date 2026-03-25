@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {    
+    // 注入样式
     let style = document.createElement("style");
     style.innerHTML = `
     body {
@@ -9,6 +10,30 @@ document.addEventListener('DOMContentLoaded', function() {
         align-items: flex-start !important;
         min-height: 100vh !important;
         background: #f0f0f0 !important;
+    }
+
+    /* 居中和毛玻璃覆盖 */
+    .container-lg, .Layout, .markdown-body, .Box {
+        margin: 40px auto !important;
+        max-width: 900px !important;
+        padding: 40px !important;
+        border-radius: 18px !important;
+        background: rgba(255,255,255,0.25) !important;
+        backdrop-filter: blur(20px) saturate(1.35) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(1.35) !important;
+        box-shadow: 0 28px 90px rgba(0,0,0,0.36) !important;
+        animation: floatShadow 1.2s ease-in-out infinite alternate !important;
+    }
+
+    @keyframes floatShadow {
+        from {
+            box-shadow: 0 18px 45px rgba(0,0,0,0.22);
+            transform: translateY(0);
+        }
+        to {
+            box-shadow: 0 28px 90px rgba(0,0,0,0.36);
+            transform: translateY(-6px);
+        }
     }
     `;
     document.head.appendChild(style);

@@ -1,4 +1,4 @@
-/* === 基础 Reset === */
+/* === Reset 基础样式 === */
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +11,7 @@ html, body {
   background: #f0f0f0;
 }
 
-/* === 毛玻璃容器 === */
+/* === 页面主体居中 + 毛玻璃效果 === */
 .container-lg, .Layout, .markdown-body, .Box {
   margin: 40px auto;
   max-width: 900px;
@@ -77,36 +77,18 @@ pre {
   padding: 16px;
   overflow-x: auto;
 }
-/* 居中和毛玻璃覆盖 */
-.container-lg, .Layout, .markdown-body {
-  margin: 0 auto !important;
-  max-width: 900px !important;
-  background: rgba(255,255,255,0.25) !important;
-  backdrop-filter: blur(20px) saturate(1.35) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(1.35) !important;
-  border-radius: 12px !important;
-  box-shadow: 0 28px 90px rgba(0,0,0,0.36) !important;
-}
-/* 居中和毛玻璃覆盖 */
-.container-lg, .Layout, .markdown-body {
-  margin: 40px auto !important;
-  max-width: 900px !important;
-  padding: 40px !important;
-  border-radius: 18px !important;
-  background: rgba(255,255,255,0.25) !important;
-  backdrop-filter: blur(20px) saturate(1.35) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(1.35) !important;
-  box-shadow: 0 28px 90px rgba(0,0,0,0.36) !important;
-  animation: floatShadow 1.2s ease-in-out infinite alternate !important;
+
+/* === 标签样式（bug/documentation） === */
+.label-bug {
+  color: #fff;
+  background: rgba(255, 0, 0, 0.6);
+  padding: 4px 8px;
+  border-radius: 6px;
 }
 
-@keyframes floatShadow {
-  from {
-    box-shadow: 0 18px 45px rgba(0,0,0,0.22);
-    transform: translateY(0);
-  }
-  to {
-    box-shadow: 0 28px 90px rgba(0,0,0,0.36);
-    transform: translateY(-6px);
-  }
+.label-doc {
+  color: #fff;
+  background: rgba(0, 120, 255, 0.6);
+  padding: 4px 8px;
+  border-radius: 6px;
 }
